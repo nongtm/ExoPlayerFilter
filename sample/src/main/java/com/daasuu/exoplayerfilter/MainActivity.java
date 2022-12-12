@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.daasuu.epf.EPlayerView;
 import com.google.android.exoplayer2.MediaItem;
-import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.source.ProgressiveMediaSource;
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
@@ -25,7 +25,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private EPlayerView ePlayerView;
-    private SimpleExoPlayer player;
+    private ExoPlayer player;
     private Button button;
     private SeekBar seekBar;
     private PlayerTimer playerTimer;
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
         DataSource.Factory dataSourceFactory = new DefaultDataSourceFactory(this, Util.getUserAgent(this, "yourApplicationName"));
 
         // SimpleExoPlayer
-        player = new SimpleExoPlayer.Builder(this)
+        player = new ExoPlayer.Builder(this)
                 .setMediaSourceFactory(new ProgressiveMediaSource.Factory(dataSourceFactory))
                 .build();
         player.addMediaItem(MediaItem.fromUri(Constant.STREAM_URL_MP4_VOD_SHORT));
@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setUoGlPlayerView() {
         ePlayerView = new EPlayerView(this);
-        ePlayerView.setSimpleExoPlayer(player);
+        ePlayerView.setExoPlayer(player);
         ePlayerView.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         ((MovieWrapperView) findViewById(R.id.layout_movie_wrapper)).addView(ePlayerView);
         ePlayerView.onResume();
