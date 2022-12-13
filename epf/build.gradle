@@ -1,6 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'maven-publish'
 group = 'com.github.nongtm'
+version = '0.3.0'
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION as int
@@ -32,4 +33,18 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.0.0'
     compileOnly 'com.google.android.exoplayer:exoplayer-core:2.18.0'
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.github.nongtm'
+                artifactId = 'ExoPlayerFilter'
+                version = '0.3.0'
+            }
+        }
+    }
 }
